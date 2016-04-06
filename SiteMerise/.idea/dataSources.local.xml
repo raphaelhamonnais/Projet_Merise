@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - PROJET_MERISE@127.0.0.1" uuid="a8dc9f43-2b86-4aef-bcc6-da83aa899edd">
+      <secret-storage>master_key</secret-storage>
+      <user-name>raphael</user-name>
+      <schema-pattern>PROJET_MERISE.*</schema-pattern>
+      <default-schemas>PROJET_MERISE.*</default-schemas>
+    </data-source>
+  </component>
+</project>

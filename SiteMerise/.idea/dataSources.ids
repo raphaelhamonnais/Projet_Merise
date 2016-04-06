@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - PROJET_MERISE@127.0.0.1" uuid="a8dc9f43-2b86-4aef-bcc6-da83aa899edd">
+    <database-info product="MySQL" version="5.5.42" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="PROJET_MERISE"/>
+    <table name="ADMINISTRATEUR" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_Utilisateur" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <primary-key name="PRIMARY" columns="ID_Utilisateur"/>
+      <foreign-key name="FK_PADMINISTRATEUR_UTILISATEUR" columns="ID_Utilisateur" ref-table="UTILISATEUR" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_Utilisateur" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="ASSOCIATION" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_MEA" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="Nom_Association" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <primary-key name="PRIMARY" columns="ID_MEA,Nom_Association"/>
+      <foreign-key name="FK_ASSOCIATION_MEA" columns="ID_MEA" ref-table="MEA" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_MEA" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_ATTRIBUT_ASSOCIATION" table="ATTRIBUT" schema="" catalog="PROJET_MERISE" columns="ID_MEA,Nom_Association"/>
+      <exported-key name="FK_PATTE_ASSOCIATION" table="PATTE" schema="" catalog="PROJET_MERISE" columns="ID_MEA,Nom_Association"/>
+    </table>
+    <table name="ATTRIBUT" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_DD" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="Nom_Attribut" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="Cle_Primaire" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MA=="/>
+      <column name="ID_MEA" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Nom_Entite" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Nom_Association" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ID_Type_Donnee" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID_DD,Nom_Attribut"/>
+      <foreign-key name="FK_ATTRIBUT_RUBRIQUE" columns="ID_DD,Nom_Attribut" ref-table="RUBRIQUE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_DD,Nom_Rubrique" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_ATTRIBUT_ENTITE" columns="ID_MEA,Nom_Entite" ref-table="ENTITE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_MEA,Nom_Entite" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_ATTRIBUT_ASSOCIATION" columns="ID_MEA,Nom_Association" ref-table="ASSOCIATION" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_MEA,Nom_Association" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_ATTRIBUT___TYPE_DONNE" columns="ID_Type_Donnee" ref-table="TYPE_DONNEE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_Type_Donnee" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_ATTRIBUT___TYPE_DONNE" unique="false" columns="ID_Type_Donnee"/>
+      <index name="FK_ATTRIBUT_ASSOCIATION" unique="false" columns="ID_MEA,Nom_Association"/>
+      <index name="FK_ATTRIBUT_ENTITE" unique="false" columns="ID_MEA,Nom_Entite"/>
+    </table>
+    <table name="CALCULEE" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_DD" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="Nom_Calculee" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="ID_Type_Donnee" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID_DD,Nom_Calculee"/>
+      <foreign-key name="FK_CALCULEE_RUBRIQUE" columns="ID_DD,Nom_Calculee" ref-table="RUBRIQUE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_DD,Nom_Rubrique" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_CALCULEE___TYPE_DONNE" columns="ID_Type_Donnee" ref-table="TYPE_DONNEE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_Type_Donnee" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_CALCULEE_A_PARTIR_DE___CALCULEE" table="CALCULEE_A_PARTIR_DE" schema="" catalog="PROJET_MERISE" columns="ID_DD,Nom_Calculee"/>
+      <index name="FK_CALCULEE___TYPE_DONNE" unique="false" columns="ID_Type_Donnee"/>
+    </table>
+    <table name="CALCULEE_A_PARTIR_DE" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_DD" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="Nom_Calculee" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="Nom_Rubrique" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <primary-key name="PRIMARY" columns="ID_DD,Nom_Calculee,Nom_Rubrique"/>
+      <foreign-key name="FK_CALCULEE_A_PARTIR_DE___CALCULEE" columns="ID_DD,Nom_Calculee" ref-table="CALCULEE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_DD,Nom_Calculee" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_CALCULEE_A_PARTIR_DE___RUBRIQUE" columns="ID_DD,Nom_Rubrique" ref-table="RUBRIQUE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_DD,Nom_Rubrique" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_CALCULEE_A_PARTIR_DE___RUBRIQUE" unique="false" columns="ID_DD,Nom_Rubrique"/>
+    </table>
+    <table name="COPIE_ELEVE" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_Copie_Eleve" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Nom_Copie_Eleve" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ID_Exercice" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ID_Utilisateur" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ID_MEA" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ID_DD" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Date_Derniere_Modif_Copie_Eleve" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="Date_Envoi_Copie_Eleve" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="Commentaire_Copie_Eleve" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="Note_Copie_Eleve" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <primary-key name="PRIMARY" columns="ID_Copie_Eleve"/>
+      <foreign-key name="FK_COPIE_ELEVE___ELEVE" columns="ID_Utilisateur" ref-table="ELEVE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_Utilisateur" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_COPIE_ELEVE___EXERCICE" columns="ID_Exercice" ref-table="EXERCICE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_Exercice" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_COPIE_ELEVE___MEA" columns="ID_MEA" ref-table="MEA" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_MEA" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_COPIE_ELEVE___DD" columns="ID_DD" ref-table="DD" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_DD" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_COPIE_ELEVE___DD" unique="false" columns="ID_DD"/>
+      <index name="FK_COPIE_ELEVE___ELEVE" unique="false" columns="ID_Utilisateur"/>
+      <index name="FK_COPIE_ELEVE___EXERCICE" unique="false" columns="ID_Exercice"/>
+      <index name="FK_COPIE_ELEVE___MEA" unique="false" columns="ID_MEA"/>
+    </table>
+    <table name="DD" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_DD" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <primary-key name="PRIMARY" columns="ID_DD"/>
+      <exported-key name="FK_COPIE_ELEVE___DD" table="COPIE_ELEVE" schema="" catalog="PROJET_MERISE" columns="ID_DD"/>
+      <exported-key name="FK_EXERCICE___DD_CORR" table="EXERCICE" schema="" catalog="PROJET_MERISE" columns="ID_DD_Correction"/>
+      <exported-key name="FK_EXERCICE___DD_FAKE" table="EXERCICE" schema="" catalog="PROJET_MERISE" columns="ID_DD_Fake"/>
+      <exported-key name="FK_RUBRIQUE_DD" table="RUBRIQUE" schema="" catalog="PROJET_MERISE" columns="ID_DD"/>
+    </table>
+    <table name="EDITION_EXERCICE" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_Edition_Exercice" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ID_Utilisateur" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ID_Exercice" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Date_Edition_Exercice" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="ID_Edition_Exercice"/>
+      <foreign-key name="FK_EDITION_EXERCICE___PROFESSEUR" columns="ID_Utilisateur" ref-table="PROFESSEUR" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_Utilisateur" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_EDITION_EXERCICE___EXERCICE" columns="ID_Exercice" ref-table="EXERCICE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_Exercice" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_EDITION_EXERCICE___EXERCICE" unique="false" columns="ID_Exercice"/>
+      <index name="FK_EDITION_EXERCICE___PROFESSEUR" unique="false" columns="ID_Utilisateur"/>
+    </table>
+    <table name="ELEVE" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_Utilisateur" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="ID_Groupe" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID_Utilisateur"/>
+      <foreign-key name="FK_ELEVE_UTILISATEUR" columns="ID_Utilisateur" ref-table="UTILISATEUR" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_Utilisateur" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_ELEVE_GROUPE" columns="ID_Groupe" ref-table="GROUPE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_Groupe" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_COPIE_ELEVE___ELEVE" table="COPIE_ELEVE" schema="" catalog="PROJET_MERISE" columns="ID_Utilisateur"/>
+      <index name="FK_ELEVE_GROUPE" unique="false" columns="ID_Groupe"/>
+    </table>
+    <table name="ENTITE" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_MEA" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="Nom_Entite" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <primary-key name="PRIMARY" columns="ID_MEA,Nom_Entite"/>
+      <foreign-key name="FK_ENTITE_MEA" columns="ID_MEA" ref-table="MEA" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_MEA" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_ATTRIBUT_ENTITE" table="ATTRIBUT" schema="" catalog="PROJET_MERISE" columns="ID_MEA,Nom_Entite"/>
+      <exported-key name="FK_PATTE_ENTITE" table="PATTE" schema="" catalog="PROJET_MERISE" columns="ID_MEA,Nom_Entite"/>
+    </table>
+    <table name="EXERCICE" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_Exercice" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Nom_Exercice" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Enonce_Exercice" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ID_Type_Exercice" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ID_MEA_Correction" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ID_MEA_Fake" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ID_DD_Correction" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ID_DD_Fake" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Correction_Prete" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MA=="/>
+      <column name="Fake_Pret" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MA=="/>
+      <column name="Exercice_Pret" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MA=="/>
+      <primary-key name="PRIMARY" columns="ID_Exercice"/>
+      <foreign-key name="FK_EXERCICE___TYPE_EXERCICE" columns="ID_Type_Exercice" ref-table="TYPE_EXERCICE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_Type_Exercice" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_EXERCICE___MEA_CORR" columns="ID_MEA_Correction" ref-table="MEA" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_MEA" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_EXERCICE___MEA_FAKE" columns="ID_MEA_Fake" ref-table="MEA" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_MEA" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_EXERCICE___DD_CORR" columns="ID_DD_Correction" ref-table="DD" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_DD" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_EXERCICE___DD_FAKE" columns="ID_DD_Fake" ref-table="DD" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_DD" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_COPIE_ELEVE___EXERCICE" table="COPIE_ELEVE" schema="" catalog="PROJET_MERISE" columns="ID_Exercice"/>
+      <exported-key name="FK_EDITION_EXERCICE___EXERCICE" table="EDITION_EXERCICE" schema="" catalog="PROJET_MERISE" columns="ID_Exercice"/>
+      <index name="UNIQUE_EXERCICE" unique="true" columns="Nom_Exercice,ID_Type_Exercice"/>
+      <index name="FK_EXERCICE___DD_CORR" unique="false" columns="ID_DD_Correction"/>
+      <index name="FK_EXERCICE___DD_FAKE" unique="false" columns="ID_DD_Fake"/>
+      <index name="FK_EXERCICE___MEA_CORR" unique="false" columns="ID_MEA_Correction"/>
+      <index name="FK_EXERCICE___MEA_FAKE" unique="false" columns="ID_MEA_Fake"/>
+      <index name="FK_EXERCICE___TYPE_EXERCICE" unique="false" columns="ID_Type_Exercice"/>
+    </table>
+    <table name="GROUPE" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_Groupe" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ID_Promotion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Nom_Groupe" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Commentaire_Groupe" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="ID_Groupe"/>
+      <foreign-key name="FK_GROUPE_PROMOTION" columns="ID_Promotion" ref-table="PROMOTION" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_Promotion" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_ELEVE_GROUPE" table="ELEVE" schema="" catalog="PROJET_MERISE" columns="ID_Groupe"/>
+      <exported-key name="FK_PROF_GERE_GROUPE___GROUPE" table="PROF_GERE_GROUPE" schema="" catalog="PROJET_MERISE" columns="ID_Groupe"/>
+      <index name="FK_GROUPE_PROMOTION" unique="false" columns="ID_Promotion"/>
+    </table>
+    <table name="MEA" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_MEA" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <primary-key name="PRIMARY" columns="ID_MEA"/>
+      <exported-key name="FK_ASSOCIATION_MEA" table="ASSOCIATION" schema="" catalog="PROJET_MERISE" columns="ID_MEA"/>
+      <exported-key name="FK_COPIE_ELEVE___MEA" table="COPIE_ELEVE" schema="" catalog="PROJET_MERISE" columns="ID_MEA"/>
+      <exported-key name="FK_ENTITE_MEA" table="ENTITE" schema="" catalog="PROJET_MERISE" columns="ID_MEA"/>
+      <exported-key name="FK_EXERCICE___MEA_CORR" table="EXERCICE" schema="" catalog="PROJET_MERISE" columns="ID_MEA_Correction"/>
+      <exported-key name="FK_EXERCICE___MEA_FAKE" table="EXERCICE" schema="" catalog="PROJET_MERISE" columns="ID_MEA_Fake"/>
+    </table>
+    <table name="PARAMETRE" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_DD" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="Nom_Parametre" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="Valeur" sqlType="VARCHAR" precision="500" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID_DD,Nom_Parametre"/>
+      <foreign-key name="FK_PARAMETRE_RUBRIQUE" columns="ID_DD,Nom_Parametre" ref-table="RUBRIQUE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_DD,Nom_Rubrique" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="PATTE" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_MEA" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="Nom_Entite" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Nom_Association" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Libelle_Cardinalite" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID_MEA,Nom_Entite,Nom_Association"/>
+      <foreign-key name="FK_PATTE_ASSOCIATION" columns="ID_MEA,Nom_Association" ref-table="ASSOCIATION" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_MEA,Nom_Association" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_PATTE_ENTITE" columns="ID_MEA,Nom_Entite" ref-table="ENTITE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_MEA,Nom_Entite" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_PATTE___TYPE_CARDINALITE" columns="Libelle_Cardinalite" ref-table="TYPE_CARDINALITE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="Libelle_Cardinalite" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_PATTE___TYPE_CARDINALITE" unique="false" columns="Libelle_Cardinalite"/>
+      <index name="FK_PATTE_ASSOCIATION" unique="false" columns="ID_MEA,Nom_Association"/>
+    </table>
+    <table name="PROFESSEUR" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_Utilisateur" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <primary-key name="PRIMARY" columns="ID_Utilisateur"/>
+      <foreign-key name="FK_PROFESSEUR_UTILISATEUR" columns="ID_Utilisateur" ref-table="UTILISATEUR" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_Utilisateur" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_EDITION_EXERCICE___PROFESSEUR" table="EDITION_EXERCICE" schema="" catalog="PROJET_MERISE" columns="ID_Utilisateur"/>
+      <exported-key name="FK_PROF_GERE_GROUPE___PROFESSEUR" table="PROF_GERE_GROUPE" schema="" catalog="PROJET_MERISE" columns="ID_Utilisateur"/>
+    </table>
+    <table name="PROF_GERE_GROUPE" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_Utilisateur" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="ID_Groupe" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <primary-key name="PRIMARY" columns="ID_Utilisateur,ID_Groupe"/>
+      <foreign-key name="FK_PROF_GERE_GROUPE___PROFESSEUR" columns="ID_Utilisateur" ref-table="PROFESSEUR" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_Utilisateur" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_PROF_GERE_GROUPE___GROUPE" columns="ID_Groupe" ref-table="GROUPE" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_Groupe" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_PROF_GERE_GROUPE___GROUPE" unique="false" columns="ID_Groupe"/>
+    </table>
+    <table name="PROMOTION" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_Promotion" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Nom_Promotion" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Annee_Promotion" sqlType="YEAR" precision="0" scale="0" nullable="true" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="ID_Promotion"/>
+      <exported-key name="FK_GROUPE_PROMOTION" table="GROUPE" schema="" catalog="PROJET_MERISE" columns="ID_Promotion"/>
+    </table>
+    <table name="RUBRIQUE" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_DD" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="Nom_Rubrique" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="Commentaire_Rubrique" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID_DD,Nom_Rubrique"/>
+      <foreign-key name="FK_RUBRIQUE_DD" columns="ID_DD" ref-table="DD" ref-schema="" ref-catalog="PROJET_MERISE" ref-columns="ID_DD" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_ATTRIBUT_RUBRIQUE" table="ATTRIBUT" schema="" catalog="PROJET_MERISE" columns="ID_DD,Nom_Attribut"/>
+      <exported-key name="FK_CALCULEE_RUBRIQUE" table="CALCULEE" schema="" catalog="PROJET_MERISE" columns="ID_DD,Nom_Calculee"/>
+      <exported-key name="FK_CALCULEE_A_PARTIR_DE___RUBRIQUE" table="CALCULEE_A_PARTIR_DE" schema="" catalog="PROJET_MERISE" columns="ID_DD,Nom_Rubrique"/>
+      <exported-key name="FK_PARAMETRE_RUBRIQUE" table="PARAMETRE" schema="" catalog="PROJET_MERISE" columns="ID_DD,Nom_Parametre"/>
+    </table>
+    <table name="TYPE_CARDINALITE" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="Libelle_Cardinalite" sqlType="VARCHAR" precision="3" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <primary-key name="PRIMARY" columns="Libelle_Cardinalite"/>
+      <exported-key name="FK_PATTE___TYPE_CARDINALITE" table="PATTE" schema="" catalog="PROJET_MERISE" columns="Libelle_Cardinalite"/>
+    </table>
+    <table name="TYPE_DONNEE" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_Type_Donnee" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="Libelle_Type_Donnee" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID_Type_Donnee"/>
+      <exported-key name="FK_ATTRIBUT___TYPE_DONNE" table="ATTRIBUT" schema="" catalog="PROJET_MERISE" columns="ID_Type_Donnee"/>
+      <exported-key name="FK_CALCULEE___TYPE_DONNE" table="CALCULEE" schema="" catalog="PROJET_MERISE" columns="ID_Type_Donnee"/>
+    </table>
+    <table name="TYPE_EXERCICE" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_Type_Exercice" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Commentaire_Type_Exercice" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="ID_Type_Exercice"/>
+      <exported-key name="FK_EXERCICE___TYPE_EXERCICE" table="EXERCICE" schema="" catalog="PROJET_MERISE" columns="ID_Type_Exercice"/>
+    </table>
+    <table name="UTILISATEUR" schema="" catalog="PROJET_MERISE" type="TABLE">
+      <column name="ID_Utilisateur" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="login" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Nom_Utilisateur" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Prenom_Utilisateur" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Mail_Utilisateur" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID_Utilisateur"/>
+      <exported-key name="FK_PADMINISTRATEUR_UTILISATEUR" table="ADMINISTRATEUR" schema="" catalog="PROJET_MERISE" columns="ID_Utilisateur"/>
+      <exported-key name="FK_ELEVE_UTILISATEUR" table="ELEVE" schema="" catalog="PROJET_MERISE" columns="ID_Utilisateur"/>
+      <exported-key name="FK_PROFESSEUR_UTILISATEUR" table="PROFESSEUR" schema="" catalog="PROJET_MERISE" columns="ID_Utilisateur"/>
+      <index name="UK_UTILISATEUR" unique="true" columns="login"/>
+    </table>
+  </data-source>
+</component>
